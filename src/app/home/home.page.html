@@ -1,20 +1,76 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-content [fullscreen]="true" color = "light">
+    <ion-grid>
+      <ion-row>
+        <ion-col size=12>
+          <h2 class="ion-text-center">Scoreboard</h2>
+        </ion-col>
+      </ion-row>
+      <ion-row >
+        <ion-col class="ion-no-padding" size = 12>
+          <ion-item color="none" lines="none" >
+            <h2>Games :</h2>
+            <ion-toggle slot="end" [(ngModel)]="isDark" (ionChange)="toggleTheme($event)" ></ion-toggle>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size= 12>
+          <ion-list style="background: transparent;" >
+            <ion-card class="ion-no-padding" *ngFor="let game of games;let i=index;" (click)="details(game)">
+              <ion-card-content class ="ion-no-padding">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size=6>
+                      <b>game no: {{games ? games[i].gameNO : 'XX'}}</b>
+                    </ion-col>
+                    <ion-col class="ion-text-end"  size=6>
+                      <b >Date: {{games ? games[i].date : 'XX'}}</b>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col >
+                      <b>Player: {{games ? games[i].players[i]+', '+games[i].players[1]+', '+games[i].players[2]+', '+games[i].players[3] : 'XX'}}</b>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col >
+                      <b>Winner: {{games ? games[i].winner : 'XX'}}</b>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+            </ion-card>
+          </ion-list >
+          <!-- <ion-card  class="ion-no-padding" *ngFor="let game of games;let i=index;">
+            <ion-card-content class ="ion-no-padding">
+              <ion-grid>
+                <ion-row>
+                  <ion-col size=6>
+                    <b>game no:{{games ? games[i].gameNO : 'XX'}}</b>
+                  </ion-col>
+                  <ion-col class="ion-text-end"  size=6>
+                    <b >Date:{{games ? games[i].date : 'XX'}}</b>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col >
+                    <b>Player: {{games ? games[i].players[i]+', '+games[i].players[1]+', '+games[i].players[2]+', '+games[i].players[3] : 'XX'}}</b>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col >
+                    <b>Winner: {{games ? games[i].winner : 'XX'}}</b>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card> -->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="addgame()">
+      <ion-fab-button color="warning">
+        <ion-icon name="add" ></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 </ion-content>

@@ -1,27 +1,31 @@
-#container {
-  text-align: center;
+@import "../../theme/variables.scss";
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+ion-title{
+  text-align:center;
+  width:100%;
+  font-family:open sans;
+}
+h2{
+  margin-top:0px !important;
+}
+ion-grid{
+  padding-inline-start: 0 !important;
+  padding-inline-end: 0 !important;
+  padding-top:0 !important;
+  padding-bottom: 0 !important;
+}
+ion-col{
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+b{
+  font-size:16px;
+  color:var(--ion-color-dark);
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+ion-toggle {
+  --handle-background-checked: #fff url(/assets/sun.png) no-repeat center / contain;
+  --handle-background: rgba(12, 1, 1, 0.401) url(/assets/moon.png) no-repeat center / contain;
 }
 
-#container a {
-  text-decoration: none;
-}

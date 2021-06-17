@@ -24,3 +24,26 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+*{
+  font-family: 'Bree Serif', serif;
+}
+
+:root {
+  --ion-color-back: #0F2B5F;
+  --ion-color-back-rgb: 15,43,95;
+  --ion-color-back-contrast: #ffffff;
+  --ion-color-back-contrast-rgb: 255,255,255;
+  --ion-color-back-shade: #0d2654;
+  --ion-color-back-tint: #27406f;
+}
+
+.ion-color-back {
+  --ion-color-base: var(--ion-color-back);
+  --ion-color-base-rgb: var(--ion-color-back-rgb);
+  --ion-color-contrast: var(--ion-color-back-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-back-contrast-rgb);
+  --ion-color-shade: var(--ion-color-back-shade);
+  --ion-color-tint: var(--ion-color-back-tint);
+}

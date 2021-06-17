@@ -1,0 +1,88 @@
+@import "../../theme/variables.scss";
+.headerText{
+  color:var(--ion-color-dark);
+  font-size: 20px;
+  font-weight: bold;
+}
+.black{
+  color: var(--ion-color-dark);
+}
+ion-card{
+  margin-inline: 0px !important;
+  border-radius: 20px !important;
+}
+.player-name {
+  color: var(--ion-color-dark);
+ position:relative;
+ left:15px;
+}
+.winner_name{
+  font-weight:bold;
+  color:var(--ion-color-dark);
+}
+
+.player-score{
+  color:var(--ion-color-dark);
+ position:relative;
+ left:15px;
+
+}
+.player-total{
+  color:var(--ion-color-dark);
+  position:relative;
+
+  right: 17px;
+  font-weight: bold;
+}
+.line{
+  border: 1px solid var(--ion-color-dark);
+  position: relative;
+  left:15px;
+  width: 90%;
+  background-color: var(--ion-color-dark);
+}
+
+.gameNo{
+  font-size:30px ;
+  font-weight: bold;
+  margin-top: 5px !important;
+  margin-bottom: 0 !important;
+}
+.header_container{
+  width: 100%;
+}
+.date{
+font-weight: 200;
+margin-bottom:10px;
+}
+ion-col{
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.score_container{
+  width: 100%;
+  height:320px;
+  border-radius:30px;
+  overflow:hidden;
+  padding:0;
+  margin:0;
+}
+
+.input{
+  border: 2px solid var(--ion-color-dark);
+  border-radius:5px;
+  height:30px;
+  width:75% !important;
+  color:black;
+}
+.trophy{
+  width:50%;
+  height:50%;
+  margin-top:15px;
+}
+
+.winner_container{
+  width: 100%;
+
+  border-radius:30px;
+}

@@ -1,0 +1,63 @@
+<ion-content [fullscreen]=true color = "light">
+  <ion-grid >
+    <ion-row>
+      <ion-col size = 12>
+          <div class="header_container">
+            <h1 class="gameNo">Game No : {{game.gameNO}}</h1>
+            <span class="date">Date: {{game.date}}</span>
+          </div>
+      </ion-col>
+    </ion-row>
+    <ion-row style = "margin-top:45px">
+      <ion-col size = 12 >
+        <ion-card>
+          <ion-card-content class="ion-no-padding">
+            <div class="score_container">
+              <div style="text-align:center">
+                <span class="headerText">Score</span>
+              </div>
+              <div class = "line"></div>
+              <div class="player">
+                <b class = "player-name">{{game ? game.players[0]: "player 1"}}</b>
+                <div class = "player-score"> ={{game.score1}}</div>
+                <div class="ion-text-end player-total">Total : {{game.total1}}</div>
+                <div class = "line"></div>
+              </div>
+
+              <div class="player">
+                <b class = "player-name">{{game ? game.players[1]: "player 2"}}</b>
+                <div class = "player-score"> ={{game.score2}}</div>
+                <div class="ion-text-end player-total">Total : {{game.total2}}</div>
+                <div class = "line"></div>
+              </div>
+
+              <div class="player">
+                <b class = "player-name">{{game ? game.players[2]: "player 3"}}</b>
+                <div class = "player-score"> ={{game.score3}}</div>
+                <div class="ion-text-end player-total">Total : {{game.total3}}</div>
+                <div class = "line"></div>
+              </div>
+              <div class="player">
+                <b class = "player-name">{{game ? game.players[3]: "player 4"}}</b>
+                <div class = "player-score"> ={{game.score4}}</div>
+                <div class="ion-text-end player-total">Total : {{game.total4}}</div>
+              </div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size = 12>
+        <ion-card>
+          <ion-card-content class="ion-no-padding">
+            <div class = "winner_container" style = "text-align:center">
+              <img class="trophy" src="../../assets/trophy.png">
+              <h1 class="winner_name;">{{game.winner}}</h1>
+          </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
