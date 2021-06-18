@@ -71,7 +71,8 @@ export class HomePage implements OnInit {
     }
 
   addgame() {
-    this.router.navigateByUrl(`/newgame/50`,  {  replaceUrl:  true  });
+    this.dataService.setData(50, this.totalGames);
+    this.router.navigateByUrl('/newgame/50', { replaceUrl: true });
   }
   ionViewDidEnter() {
     this.presentLoading();
@@ -79,7 +80,6 @@ export class HomePage implements OnInit {
 
   async loadData(loading){
     this.isDark = await this.storage.get('isDark');
-    console.log(this.isDark);
     this.storage.get('mikGameScore').then((data)=>{
       if(data == null){
         this.totalGames = 0;
@@ -89,7 +89,6 @@ export class HomePage implements OnInit {
         this.games = data;
       }
       loading.dismiss();
-      this.dataService.setData(50,this.totalGames);
     }).catch((err)=>{
       console.log(err);
     });
@@ -103,8 +102,13 @@ export class HomePage implements OnInit {
     toast.present();
   }
   details(game){
-    this.dataService.setData(40,game);
-    this.router.navigateByUrl(`/details/40`, {replaceUrl: true});
+    console.log(game);
+    this.dataService.setData(50, game);
+    if (game.gameFinish == true) {
+      this.router.navigateByUrl(`/details/50`, { replaceUrl: true });
+    } else {
+      this.router.navigateByUrl(`/newgame/50`, { replaceUrl: true });
+    }
   }
 
   async toggleTheme(event){

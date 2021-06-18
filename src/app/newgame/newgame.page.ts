@@ -31,6 +31,8 @@ export class NewgamePage implements OnInit {
   round: number;
   winner;
   page: any;
+  saveGame: any;
+  game: any =0;
   constructor(
     private platform: Platform,
     private routerOutlet: IonRouterOutlet,
@@ -160,14 +162,108 @@ export class NewgamePage implements OnInit {
 
   async ngOnInit() {
     await this.storage.create();
-    this.showPrompt();
     if (this.route.snapshot.data['special']) {
-      console.log('taking routes');
-      this.gameNo = this.route.snapshot.data['special'];
+      this.game = this.route.snapshot.data['special'];
     }
+    if(typeof this.game === 'object'){
+      this.gameNo = this.game.gameNO-1;
+      this.players = this.game.players;
+      this.score1=this.game.score1;
+      this.score2=this.game.score2;
+      this.score3=this.game.score3;
+      this.score4 = this.game.score4;
+      this.total1 = this.game.total1;
+      this.total2 = this.game.total2;
+      this.total3 = this.game.total3;
+      this.total4 = this.game.total4;
+      this.round = this.game.round;
+    }else{
+      this.gameNo = this.game;
+      this.showPrompt();
+    }
+
   }
 
-  addScore() {
+  // addScore() {
+  //   if (
+  //     this.point1 !== null &&
+  //     this.point2 !== null &&
+  //     this.point3 !== null &&
+  //     this.point4 !== null &&
+  //     this.point1 !== undefined &&
+  //     this.point2 !== undefined &&
+  //     this.point3 !== undefined &&
+  //     this.point4 !== undefined
+  //   ) {
+  //     const zero = 0;
+  //     if (this.round === 1) {
+  //       this.score1 = '';
+  //       this.score2 = '';
+  //       this.score3 = '';
+  //       this.score4 = '';
+  //       this.total1 += this.point1;
+  //       this.score1 =
+  //         this.point1 < 10
+  //           ? '0' + this.point1.toString()
+  //           : this.point1.toString();
+  //       this.point1 = null;
+  //       this.total2 += this.point2;
+  //       this.score2 =
+  //         this.point2 < 10
+  //           ? '0' + this.point2.toString()
+  //           : this.point2.toString();
+  //       this.point2 = null;
+  //       this.total3 += this.point3;
+  //       this.score3 =
+  //         this.point3 < 10
+  //           ? '0' + this.point3.toString()
+  //           : this.point3.toString();
+  //       this.point3 = null;
+  //       this.total4 += this.point4;
+  //       this.score4 =
+  //         this.point4 < 10
+  //           ? '0' + this.point4.toString()
+  //           : this.point4.toString();
+  //       this.point4 = null;
+  //       this.round++;
+  //     } else {
+  //       this.total1 += this.point1;
+  //       if (this.point1 < 10) {
+  //         this.score1 = this.score1 + ' + ' + '0' + this.point1.toString();
+  //       } else {
+  //         this.score1 = this.score1 + ' + ' + this.point1.toString();
+  //       }
+  //       this.point1 = null;
+  //       this.total2 += this.point2;
+  //       if (this.point2 < 10) {
+  //         this.score2 = this.score2 + ' + ' + '0' + this.point2.toString();
+  //       } else {
+  //         this.score2 = this.score2 + ' + ' + this.point2.toString();
+  //       }
+  //       this.point2 = null;
+  //       this.total3 += this.point3;
+  //       if (this.point3 < 10) {
+  //         this.score3 = this.score3 + ' + ' + '0' + this.point3.toString();
+  //       } else {
+  //         this.score3 = this.score3 + ' + ' + this.point3.toString();
+  //       }
+  //       this.point3 = null;
+  //       this.total4 += this.point4;
+  //       if (this.point4 < 10) {
+  //         this.score4 = this.score4 + ' + ' + '0' + this.point4.toString();
+  //       } else {
+  //         this.score4 = this.score4 + ' + ' + this.point4.toString();
+  //       }
+  //       this.point4 = null;
+  //       this.round++;
+  //     }
+  //     if (this.round === 8) {
+  //       this.gameEnd();
+  //     }
+  //   }
+  // }
+
+  async addScore() {
     if (
       this.point1 !== null &&
       this.point2 !== null &&
@@ -178,7 +274,6 @@ export class NewgamePage implements OnInit {
       this.point3 !== undefined &&
       this.point4 !== undefined
     ) {
-      const zero = 0;
       if (this.round === 1) {
         this.score1 = '';
         this.score2 = '';
@@ -240,11 +335,79 @@ export class NewgamePage implements OnInit {
         this.point4 = null;
         this.round++;
       }
+      if    (this.saveGame == undefined)    {
+        this.saveGame = await this.storage.get('mikGameScore');
+      }
+      if(this.saveGame == null){
+        const game = {
+          gameNO: this.gameNo + 1,
+          date: this.date,
+          players: this.players,
+          score1: this.score1,
+          score2: this.score2,
+          score3: this.score3,
+          score4: this.score4,
+          total1: this.total1,
+          total2: this.total2,
+          total3: this.total3,
+          total4: this.total4,
+          winner: 'Game is not Finish',
+          gameFinish:false,
+          round:this.round
+        };
+        const gArray = [];
+        gArray.push(game);
+        this.savetoStorage(gArray);
+        this.saveGame = gArray;
+      }else if(this.saveGame.length == this.gameNo){
+        const game = {
+          gameNO: this.gameNo + 1,
+          date: this.date,
+          players: this.players,
+          score1: this.score1,
+          score2: this.score2,
+          score3: this.score3,
+          score4: this.score4,
+          total1: this.total1,
+          total2: this.total2,
+          total3: this.total3,
+          total4: this.total4,
+          winner: 'Game is not completed',
+          gameFinish:false,
+          round:this.round
+        };
+        this.saveGame.push(game);
+        this.savetoStorage(this.saveGame);
+      }else if(this.round !==8){
+        const game = {
+          gameNO: this.gameNo + 1,
+          date: this.date,
+          players: this.players,
+          score1: this.score1,
+          score2: this.score2,
+          score3: this.score3,
+          score4: this.score4,
+          total1: this.total1,
+          total2: this.total2,
+          total3: this.total3,
+          total4: this.total4,
+          winner: 'Game is not completed',
+          gameFinish:false,
+          round: this.round
+        };
+        this.saveGame[this.gameNo] = game;
+        this.savetoStorage(this.saveGame);
+      }
+      console.log(this.saveGame);
       if (this.round === 8) {
         this.gameEnd();
       }
     }
   }
+  async savetoStorage(gameArray){
+    await this.storage.set('mikGameScore',gameArray);
+  }
+
   async gameEnd() {
     const a = this.total1;
     const b = this.total2;
@@ -276,20 +439,11 @@ export class NewgamePage implements OnInit {
       total3: this.total3,
       total4: this.total4,
       winner: this.winner,
+      gameFinish:true
     };
-    const gameArray = [];
-    gameArray.push(game);
-    this.storage
-      .get('mikGameScore')
-      .then(async (data) => {
-        if (data == null) {
-          await this.storage.set('mikGameScore', gameArray);
-        } else {
-          data.push(game);
-          await this.storage.set('mikGameScore', data);
-        }
-      })
-      .catch((err) => {});
+    this.saveGame[this.gameNo]= game;
+    this.savetoStorage(this.saveGame);
+    console.log(this.saveGame);
   }
 
   move(txt1, txt2) {
